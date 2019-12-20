@@ -15,7 +15,7 @@ class Log:
         self.logger_ = logging.getLogger(name)
 
         # Set the file path and name of the logs
-        handler = logging.FileHandler(log_dir + "/" + str(datetime.datetime.now()).replace(" ", "") + "_midas")
+        handler = logging.FileHandler(log_dir + "/" + str(datetime.datetime.now()).replace(" ", "") + self.__name__ + "_midas.log")
         handler.setLevel(level)
 
         # Create a logging format
