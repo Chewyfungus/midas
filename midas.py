@@ -1,5 +1,5 @@
-from logger import Log
-import logging
+from logger import logger
+from data_parser import RawData
 
 
 class Midas:
@@ -9,17 +9,25 @@ class Midas:
 
     def __init__(self):
         # This gets run whenever a new Midas object is created
-        self.main_logger = Log("MainLog", level=logging.DEBUG)
-        self.main_logger.debug("Initialized MainLog")
-        self.main_logger.debug("Initialized a Midas object, {}".format(repr(self)))
+        logger.debug("Initialized a Midas object, {}".format(repr(self)))
+        self.raw_data = None
+
+    def train(self, file):
+        """
+        Train the model. Right now this just parses data from a CSV into a RawData object and prints it
+        :param file:
+        :return:
+        """
+        self.raw_data = RawData(file)
+        logger.info(self.raw_data)
 
     def start(self):
         """
         Start midas. Ayla, this is your entry point.
         :return:
         """
-        self.main_logger.debug("stonks")
-        self.main_logger.info("stocks")
-        self.main_logger.warning("Stocks")
-        self.main_logger.error("STOCKS")
-        self.main_logger.critical("STOCKS!!!!!")
+        logger.debug("stonks")
+        logger.info("stocks")
+        logger.warning("Stocks")
+        logger.error("STOCKS")
+        logger.critical("STOCKS!!!!!")
