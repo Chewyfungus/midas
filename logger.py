@@ -2,28 +2,31 @@ import datetime
 import logging
 
 LOG_DIR = "logs"
-
+LOG_FORMAT = "%(asctime)s [%(levelname)s]: %(message)s"
 
 class Log:
     """
-    This class is the main logger for midas. We might add more loggers later
+    This class is a generic logger. It logs to console and file.
     """
 
     def __init__(self, name,  level=logging.INFO, log_dir=LOG_DIR):
         # Set the logging verbosity
-        logging.basicConfig(level=level)
         self.logger_ = logging.getLogger(name)
+        self.logger_.setLevel(level)
 
-        # Set the file path and name of the logs
-        handler = logging.FileHandler(log_dir + "/" + str(datetime.datetime.now()).replace(" ", "") + "_midas.log")
-        handler.setLevel(level)
+        # Set up the file handler so it logs to a file
+        file_handler = logging.FileHandler(log_dir + "/midas_" + str(datetime.datetime.now().strftime("%y-%m-%d-%H:%M:%S")) + ".log")
+        file_handler.setLevel(level)
+        file_handler.setFormatter(logging.Formatter(LOG_FORMAT))
 
-        # Create a logging format
-        formatter = logging.Formatter('%(asctime)s-%(name)s-%(levelname)s-%(message)s')
-        handler.setFormatter(formatter)
+        # Set up a stream handler so it logs to console
+        stream_handler = logging.StreamHandler()
+        stream_handler.setLevel(level)
+        stream_handler.setFormatter(logging.Formatter(LOG_FORMAT))
 
         # Add the handlers to the logger
-        self.logger_.addHandler(handler)
+        self.logger_.addHandler(file_handler)
+        self.logger_.addHandler(stream_handler)
 
     def debug(self, msg):
         """
