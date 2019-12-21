@@ -2,4 +2,4 @@
 let's get this bread
 
 ## Installation
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
