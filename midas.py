@@ -1,5 +1,5 @@
 from logger import logger
-from data_parser import RawData
+from scrapers.yhf_scraper import RawData
 
 
 class Midas:
