@@ -81,4 +81,6 @@ __pycache__
 .idea
 .idea/**/
 .idea/*
-
+.api_keys
+.api_keys/**/
+*.api
