@@ -1,1 +1,0 @@
-# create a generic stock/trade/data object here
