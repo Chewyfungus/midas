@@ -3,7 +3,13 @@
 
 # User-def
 venv/
-bin/API/key.txt
+logs/
+bin/API/
+data/
+images/
+.gitignore
+midas.code-workspace
+settings.json
 
 # User-specific stuff
 .idea/**/workspace.xml
