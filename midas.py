@@ -1,5 +1,4 @@
 from logger import logger
-from scrapers.yhf_scraper import RawData
 
 
 class Midas:
@@ -18,8 +17,7 @@ class Midas:
         :param file:
         :return:
         """
-        self.raw_data = RawData(file)
-        logger.info(self.raw_data)
+        return True
 
     def start(self):
         """

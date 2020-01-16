@@ -1,6 +1,7 @@
 import datetime
 from logger import logger
 
+
 class Stock:
     """
     This class holds all the info on a stock at a given time
