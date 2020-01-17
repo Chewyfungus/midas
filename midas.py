@@ -28,8 +28,8 @@ class Midas:
         :return:
         """
 
-        G = Gold()
-        G.test()
+        g = Gold()
+        g.test()
 
         logger.debug("stonks")
         logger.info("stocks")
