@@ -5,7 +5,9 @@
 venv/
 logs/
 bin/API/
-data/
+data/MNIST
+data/yahoo_finance_daily
+data/alpha_vantage_intraday
 images/
 .gitignore
 midas.code-workspace
