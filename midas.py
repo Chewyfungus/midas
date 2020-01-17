@@ -1,5 +1,6 @@
+import tensorflow as tf
 from logger import logger
-
+from gold import Gold
 
 class Midas:
     """
@@ -11,12 +12,14 @@ class Midas:
         logger.debug("Initialized a Midas object, {}".format(repr(self)))
         self.raw_data = None
 
-    def train(self, file):
+    def train(self):
         """
-        Train the model. Right now this just parses data from a CSV into a RawData object and prints it
-        :param file:
-        :return:
         """
+        x_train = 0
+        y_train = 0
+
+        x_test = 0
+        y_test = 0
         return True
 
     def start(self):
@@ -24,6 +27,10 @@ class Midas:
         Start midas. Ayla, this is your entry point.
         :return:
         """
+
+        G = Gold()
+        G.test()
+
         logger.debug("stonks")
         logger.info("stocks")
         logger.warning("Stocks")
