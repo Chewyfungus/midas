@@ -40,7 +40,8 @@ class Gold:
 
         m_train_data = train_data
         m_train_data["Price", "Open"] = train_data.apply(lambda x: self.p_scaled(x) if x.name in ["Price","Open"] else x)
-        logger.info(train_data.head())
+
+        logger.info(m_train_data.head())
         # test_data["Price"] = pd.apply(self.p_scaled)
 
         # modDfObj = dfObj.apply(lambda x: np.square(x) if x.name in ['x', 'y'] else x)
