@@ -38,7 +38,8 @@ class Gold:
         xmax = 1613.3
         xmin = 255.0
 
-        train_data['Price', 'Open'] = pd.apply(lambda x: self.p_scaled(x) if x.name in ['Price', 'Open'] else x)
+        m_train_data = train_data
+        m_train_data["Price", "Open"] = train_data.apply(lambda x: self.p_scaled(x) if x.name in ["Price","Open"] else x)
         logger.info(train_data.head())
         # test_data["Price"] = pd.apply(self.p_scaled)
 
