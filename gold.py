@@ -39,7 +39,7 @@ class Gold:
         xmin = 255.0
 
         m_train_data = train_data
-        m_train_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
+        m_train_data['Price'] = train_data.apply(lambda x: self.p_scaled(x) if x.name == 'Price' else x)
 
         logger.info(m_train_data.head())
         # test_data["Price"] = pd.apply(self.p_scaled)
