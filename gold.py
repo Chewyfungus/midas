@@ -13,10 +13,10 @@ class Gold:
         train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv",))
         test_data = pd.DataFrame(pd.read_csv("data/gold_futures_test.csv"))
 
-        cols = ["Price, Open, High, Low"]
+        cols = ["Price", "Open", "High", "Low"]
 
-        train_data[cols] = train_data[cols].str.replace(',', '')
-        test_data[cols] = test_data[cols].str.replace(',', '')
+        train_data[cols] = train_data[cols].replace({'\$': '', ',': ''}, regex=True)
+        test_data[cols] = test_data[cols].replace({'\$': '', ',': ''}, regex=True)
 
         train_data["Date"] = pd.to_datetime(train_data["Date"])
         train_data["Price"] = pd.to_numeric(train_data["Price"])
