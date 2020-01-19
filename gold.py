@@ -4,7 +4,6 @@ import numpy as np
 from midas import logger
 import pandas as pd
 
-
 class Gold:
     def __init__(self):
         logger.debug("Initialized a Gold object, {}".format(repr(self)))
@@ -33,7 +32,7 @@ class Gold:
         logger.info(train_data.head())
 
         logger.info(train_data.min())
-
         logger.info(test_data.max())
+        # Max: 1613.3; Min: 255
 
 
