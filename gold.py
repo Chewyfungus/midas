@@ -10,25 +10,24 @@ class Gold:
         logger.debug("Initialized a Gold object, {}".format(repr(self)))
 
     def test(self):
-        train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv"))
-
-        """
-        , dtype = {
-            ""
-        }
-        """
+        train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv",))
+        train_data["Date"] = pd.to_datetime(train_data["Date"])
+        train_data["Price"] = pd.to_numeric()
+        train_data["Open"] = pd.to_numeric()
+        train_data["High"] = pd.to_numeric()
+        train_data["Low"] = pd.to_numeric()
 
         test_data = pd.DataFrame(pd.read_csv("data/gold_futures_test.csv"))
+        test_data["Date"] = pd.to_datetime(train_data["Date"])
+        test_data["Price"] = pd.to_numeric()
+        test_data["Open"] = pd.to_numeric()
+        test_data["High"] = pd.to_numeric()
+        train_data["Low"] = pd.to_numeric()
 
         logger.info(train_data.head())
 
-        p_tr_max = train_data['High'].max()
-        p_tr_min = train_data['Low'].min()
+        logger.info(train_data.min())
 
-        p_te_max = test_data['High'].max()
-        p_te_min = test_data['Low'].min()
+        logger.info(test_data.max())
 
-        logger.info(p_tr_max)
-        logger.info(p_tr_min)
-        logger.info(p_te_max)
-        logger.info(p_te_min)
+
