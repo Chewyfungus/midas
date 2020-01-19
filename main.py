@@ -6,4 +6,3 @@ from midas import Midas
 
 m = Midas()
 m.start()
-m.train("data/AAPL.csv")
