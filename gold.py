@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from midas import logger
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 
 class Gold:
     def __init__(self):
@@ -34,5 +35,23 @@ class Gold:
         logger.info(train_data.min())
         logger.info(test_data.max())
         # Max: 1613.3; Min: 255
+        xmax = 1613.3
+        xmin = 255.0
+
+        train_data["Price"] = pd.apply(lambda x: self.p_scaled(x.Price, xmax, xmin), axis=1)
+        logger.info(train_data.head())
+        train_data["Open"] = pd.apply(self.p_scaled)
+        test_data["Price"] = pd.apply(self.p_scaled)
+        test_data["Open"] = pd.apply(self.p_scaled)
 
 
+
+        # X_std = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
+        # X_scaled = X_std * (max - min) + min
+
+    def p_std(self, x, xmin, xmax):
+        return ((x - xmin) / (xmax - xmin))
+
+    def p_scaled(self, x, xmax, xmin):
+        scale = (1 / (xmax - xmin)) - xmin
+        return x
