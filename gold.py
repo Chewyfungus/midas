@@ -1,9 +1,9 @@
 import csv
 import tensorflow as tf
 import numpy as np
+from sklearn import preprocessing
 from midas import logger
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
 
 class Gold:
     def __init__(self):
@@ -38,8 +38,11 @@ class Gold:
         xmax = 1613.3
         xmin = 255.0
 
+        scaler = preprocessing.MinMaxScaler()
+
         m_train_data = train_data
-        m_train_data['Price'] = train_data.apply(lambda x: self.p_scaled(x) if x.name == 'Price' else x)
+        m_train_data[["Price", "Open"]] = scaler.fit_transform(m_train_data[["Price", "Open"]])
+        # m_train_data['Price'] = train_data.apply(lambda x: self.p_scaled(x) if x.name == 'Price' else x)
 
         logger.info(m_train_data.head())
         # test_data["Price"] = pd.apply(self.p_scaled)
