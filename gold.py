@@ -44,6 +44,7 @@ class Gold:
 
         # modDfObj = dfObj.apply(lambda x: np.square(x) if x.name in ['x', 'y'] else x)
 
+
         # X_std = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
         # X_scaled = X_std * (max - min) + min
 
