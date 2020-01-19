@@ -11,13 +11,19 @@ class Gold:
 
     def test(self):
         train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv",))
+        test_data = pd.DataFrame(pd.read_csv("data/gold_futures_test.csv"))
+
+        cols = ["Price, Open, High, Low"]
+
+        train_data[cols] = train_data[cols].str.replace(',', '')
+        test_data[cols] = test_data[cols].str.replace(',', '')
+
         train_data["Date"] = pd.to_datetime(train_data["Date"])
         train_data["Price"] = pd.to_numeric(train_data["Price"])
         train_data["Open"] = pd.to_numeric(train_data["Open"])
         train_data["High"] = pd.to_numeric(train_data["High"])
         train_data["Low"] = pd.to_numeric(train_data["Low"])
 
-        test_data = pd.DataFrame(pd.read_csv("data/gold_futures_test.csv"))
         test_data["Date"] = pd.to_datetime(train_data["Date"])
         test_data["Price"] = pd.to_numeric(test_data["Price"])
         test_data["Open"] = pd.to_numeric(test_data["Open"])
