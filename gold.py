@@ -22,13 +22,8 @@ class Gold:
 
         logger.info(train_data.head())
 
-        p_tr_max = train_data['High'].max()
-        p_tr_min = train_data['Low'].min()
+        logger.info(train_data.min())
 
-        p_te_max = test_data['High'].max()
-        p_te_min = test_data['Low'].min()
+        logger.info(test_data.max())
 
-        logger.info(p_tr_max)
-        logger.info(p_tr_min)
-        logger.info(p_te_max)
-        logger.info(p_te_min)
+
