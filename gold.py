@@ -5,29 +5,28 @@ from sklearn import preprocessing
 from midas import logger
 import pandas as pd
 
+
 class Gold:
     def __init__(self):
         logger.debug("Initialized a Gold object, {}".format(repr(self)))
 
     def test(self):
-        train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv",))
+        train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv", ))
         test_data = pd.DataFrame(pd.read_csv("data/gold_futures_test.csv"))
 
         cols_train = ["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"]
         cols_test = ["PriceTest", "OpenTest", "HighTest", "LowTest"]
 
-        cols_train_PO = ["PriceTrain", "OpenTrain"]
-        cols_test_PO = ["PriceTest", "OpenTest"]
+        train_data[cols_train] = train_data[cols_train].replace({',': ''}, regex=True)
+        test_data["PriceTest", "OpenTest", "HighTest",
+                  "LowTest"] = test_data["PriceTest", "OpenTest", "HighTest",
+                                         "LowTest"].replace({'\$': '', ',': ''}, regex=True)
 
-        train_data["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"] = \
-            train_data["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"].replace({'\$': '', ',': ''}, regex=True)
-        test_data["PriceTest", "OpenTest", "HighTest", "LowTest"] = \
-            test_data["PriceTest", "OpenTest", "HighTest", "LowTest"].replace({'\$': '', ',': ''}, regex=True)
+        train_data["PriceTrain", "OpenTrain", "HighTrain",
+                   "LowTrain"] = pd.to_numeric(train_data["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"])
+        test_data["PriceTest", "OpenTest", "HighTest",
+                  "LowTest"] = pd.to_numeric(test_data["PriceTest", "OpenTest", "HighTest", "LowTest"])
 
-        train_data["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"] = \
-            pd.to_numeric(train_data["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"])
-        test_data["PriceTest", "OpenTest", "HighTest", "LowTest"] = \
-            pd.to_numeric(test_data["PriceTest", "OpenTest", "HighTest", "LowTest"])
         train_data["DateTrain"] = pd.to_datetime(train_data["DateTrain"])
         test_data["DateTest"] = pd.to_datetime(train_data["DateTest"])
 
@@ -59,6 +58,7 @@ class Gold:
         # m_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
 
         logger.info(m_data.head())
+
     """    
     def p_std(self, x):
         return ((x - 255.0) / (1613.3 - 255.0))
