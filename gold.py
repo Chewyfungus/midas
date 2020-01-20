@@ -13,12 +13,21 @@ class Gold:
         train_data = pd.DataFrame(pd.read_csv("data/gold_futures_train.csv",))
         test_data = pd.DataFrame(pd.read_csv("data/gold_futures_test.csv"))
 
-        cols0 = ["Price0", "Open0", "High0", "Low0"]
-        cols1 = ["Price1", "Open1", "High1", "Low1"]
+        cols_train = ["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"]
+        cols_test = ["PriceTest", "OpenTest", "HighTest", "LowTest"]
 
-        train_data[cols0] = train_data[cols0].replace({'\$': '', ',': ''}, regex=True)
-        test_data[cols1] = test_data[cols1].replace({'\$': '', ',': ''}, regex=True)
+        cols_train_PO = ["PriceTrain", "OpenTrain"]
+        cols_test_PO = ["PriceTest", "OpenTest"]
 
+        train_data[cols_train] = train_data[cols_train].replace({'\$': '', ',': ''}, regex=True)
+        test_data[cols_test] = test_data[cols_test].replace({'\$': '', ',': ''}, regex=True)
+
+        train_data[cols_train] = pd.to_numeric(train_data[cols_train])
+        test_data[cols_test] = pd.to_numeric(test_data[cols_test])
+        train_data["DateTrain"] = pd.to_datetime(train_data["DateTrain"])
+        test_data["DateTest"] = pd.to_datetime(train_data["DateTest"])
+
+        """
         train_data["Date0"] = pd.to_datetime(train_data["Date0"])
         train_data["Price0"] = pd.to_numeric(train_data["Price0"])
         train_data["Open0"] = pd.to_numeric(train_data["Open0"])
@@ -30,8 +39,7 @@ class Gold:
         test_data["Open1"] = pd.to_numeric(test_data["Open1"])
         test_data["High1"] = pd.to_numeric(test_data["High1"])
         test_data["Low1"] = pd.to_numeric(test_data["Low1"])
-
-        logger.info(train_data.head())
+        """
 
         logger.info(train_data.min())
         logger.info(test_data.max())
@@ -43,7 +51,7 @@ class Gold:
 
         m_data = pd.concat([train_data, test_data], axis=1)
         m_data.head()
-        m_data[["Price0", "Open0", "Price1", "Open1"]] = scaler.fit_transform(m_data[["Price0", "Open0", "Price1", "Open1"]])
+        m_data[[cols_train_PO, cols_test_PO]] = scaler.fit_transform(m_data[[cols_train_PO, cols_test_PO]])
         # m_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
 
         logger.info(m_data.head())
