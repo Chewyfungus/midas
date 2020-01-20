@@ -45,7 +45,7 @@ class Gold:
         m_data[["Price", "Open"]] = scaler.fit_transform(m_data[["Price", "Open"]])
         # m_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
 
-        logger.info(m_train_data.head())
+        logger.info(m_data.head())
     """    
     def p_std(self, x):
         return ((x - 255.0) / (1613.3 - 255.0))
