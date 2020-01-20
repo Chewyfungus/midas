@@ -21,7 +21,7 @@ class Gold:
         test_data[cols_test] = test_data[cols_test].replace({',': ''}, regex=True)
         print(type(train_data["PriceTrain"]))
 
-        train_data[cols_train] = train_data[cols_train].apply(pd.to_numeric(), errors='coerce')
+        train_data[cols_train] = train_data[cols_train].apply(pd.to_numeric, errors='coerce')
         test_data[cols_test] = pd.to_numeric(test_data[cols_test])
 
         train_data["DateTrain"] = pd.to_datetime(train_data["DateTrain"])
