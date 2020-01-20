@@ -22,7 +22,7 @@ class Gold:
         print(type(train_data["PriceTrain"]))
 
         train_data[cols_train] = train_data[cols_train].apply(pd.to_numeric, errors='coerce')
-        test_data[cols_test] = test_data[cols_test.apply(pd.to_numeric, errors='coerce')
+        test_data[cols_test] = test_data[cols_test].apply(pd.to_numeric, errors='coerce')
 
         train_data["DateTrain"] = pd.to_datetime(train_data["DateTrain"])
         test_data["DateTest"] = pd.to_datetime(train_data["DateTest"])
