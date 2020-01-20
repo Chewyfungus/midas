@@ -29,7 +29,7 @@ class Gold:
         test_data["Price1"] = pd.to_numeric(test_data["Price1"])
         test_data["Open1"] = pd.to_numeric(test_data["Open1"])
         test_data["High1"] = pd.to_numeric(test_data["High1"])
-        train_data["Low1"] = pd.to_numeric(train_data["Low1"])
+        test_data["Low1"] = pd.to_numeric(test_data["Low1"])
 
         logger.info(train_data.head())
 
