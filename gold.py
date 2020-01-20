@@ -18,9 +18,7 @@ class Gold:
         cols_test = ["PriceTest", "OpenTest", "HighTest", "LowTest"]
 
         train_data[cols_train] = train_data[cols_train].replace({',': ''}, regex=True)
-        test_data["PriceTest", "OpenTest", "HighTest",
-                  "LowTest"] = test_data["PriceTest", "OpenTest", "HighTest",
-                                         "LowTest"].replace({'\$': '', ',': ''}, regex=True)
+        test_data[cols_test] = test_data[cols_test].replace({',': ''}, regex=True)
 
         train_data["PriceTrain", "OpenTrain", "HighTrain",
                    "LowTrain"] = pd.to_numeric(train_data["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"])
