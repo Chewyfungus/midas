@@ -20,8 +20,8 @@ class Gold:
         train_data[cols_train] = train_data[cols_train].replace({',': ''}, regex=True)
         test_data[cols_test] = test_data[cols_test].replace({',': ''}, regex=True)
 
-        train_data[cols_train] = train_data[cols_train].to_numeric(train_data[cols_train])
-        test_data[cols_test] = test_data[cols_test].to_numeric(test_data[cols_test])
+        train_data[cols_train] = pd.to_numeric(train_data[cols_train])
+        test_data[cols_test] = pd.to_numeric(test_data[cols_test])
 
         train_data["DateTrain"] = pd.to_datetime(train_data["DateTrain"])
         test_data["DateTest"] = pd.to_datetime(train_data["DateTest"])
