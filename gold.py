@@ -40,9 +40,10 @@ class Gold:
 
         scaler = preprocessing.MinMaxScaler()
 
-        m_train_data = train_data
-        m_train_data[["Price", "Open"]] = scaler.fit_transform(m_train_data[["Price", "Open"]])
-        # m_train_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
+        m_data = pd.concat([train_data, test_data], axis=1)
+        m_data.head()
+        m_data[["Price", "Open"]] = scaler.fit_transform(m_data[["Price", "Open"]])
+        # m_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
 
         logger.info(m_train_data.head())
     """    
