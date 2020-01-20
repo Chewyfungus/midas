@@ -16,6 +16,7 @@ class Gold:
 
         cols_train = ["PriceTrain", "OpenTrain", "HighTrain", "LowTrain"]
         cols_test = ["PriceTest", "OpenTest", "HighTest", "LowTest"]
+        cols = ["PriceTrain", "OpenTrain", "HighTrain", "LowTrain", "PriceTest", "OpenTest", "HighTest", "LowTest"]
 
         train_data[cols_train] = train_data[cols_train].replace({',': ''}, regex=True)
         test_data[cols_test] = test_data[cols_test].replace({',': ''}, regex=True)
@@ -51,7 +52,7 @@ class Gold:
 
         m_data = pd.concat([train_data, test_data], axis=1)
         m_data.head()
-        m_data[[cols_train, cols_test]] = scaler.fit_transform(m_data[[cols_train, cols_test]])
+        m_data[cols] = scaler.fit_transform(m_data[cols])
         # m_data["Price"] = train_data.apply(lambda x: self.p_scaled(x) if x.name == "Price" else x)
 
         logger.info(m_data.head())
