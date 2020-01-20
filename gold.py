@@ -25,7 +25,7 @@ class Gold:
         test_data[cols_test] = test_data[cols_test].apply(pd.to_numeric, errors='coerce')
 
         train_data["DateTrain"] = pd.to_datetime(train_data["DateTrain"])
-        test_data["DateTest"] = pd.to_datetime(train_data["DateTest"])
+        test_data["DateTest"] = pd.to_datetime(test_data["DateTest"])
 
         """
         train_data["Date0"] = pd.to_datetime(train_data["Date0"])
