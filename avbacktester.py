@@ -40,8 +40,8 @@ item = library.read('AMZN')
 aapl = item.data
 rawdata = item.metadata
 aapl_data, meta_aapl_data = ts.get_intraday('AMZN')
-API_KEY = 'PKVOKNV8I0IUQOEP8CYZ'
-SECRET_KEY = 'twiQK0y21IbqjR5wbj0/EUMGDfoJgissCYa49j3i'
+API_KEY = 'Alpaca-Api-Key-Here'
+SECRET_KEY = 'Alpaca-Secret-Key-Here'
 api = tradeapi.REST(API_KEY,SECRET_KEY,'https://paper-api.alpaca.markets', api_version='v2')
 account = api.get_account()
 ti = TechIndicators(key, output_format='pandas')
@@ -52,6 +52,7 @@ positions = "/v2/positions/".format("https://paper-api.alpaca.markets")
 # In[37]:
 
 
+#Ema cross signal download from AV
 
 period = 4
 data_tis, meta_data_ti = ti.get_ema(symbol='AMZN', interval='1min', time_period=period, series_type='close')
@@ -93,14 +94,22 @@ cross = cross1.rename(columns = {"0" : "emacross"})
 
 cross['change'] = cross['open'] - cross['price']
 
+#Buy when EMA cross is +, sell when -
+
 cross['buy'] = (cross.emacross >= 0).astype('int')
 cross['buy1'] = cross['buy'].shift(-1)
+
+#Sale occurs during first crossover period
 
 cross['sale'] = cross['buy'] - cross['buy1']
 
 cross['strat'] = 0
 
+#For loop through time series testing strategy
+
 for i in range(1, 1800):
+    
+    #Two periods without crossovers required 
     
     if cross.loc[i+1, 'sale'] == 0 and cross.loc[i+2, 'sale'] == 0:
     
@@ -118,6 +127,7 @@ for i in range(1, 1800):
         elif cross.loc[i, 'emacross'] < 0 and cross.loc[i+1, 'emacross'] > 0 and cross.loc[i+2, 'emacross'] > 0:
             cross.loc[i, 'strat'] = -1
 
+    #Reverse the above strategy when crossover has occurred within two periods prior
             
     elif cross.loc[i+1, 'sale'] != 0 or cross.loc[i+2, 'sale'] != 0:
         
@@ -155,11 +165,11 @@ cross['warret'] = cross['price'] * cross['strat']
 # In[6]:
 
 
+#Results of strategy (Alpha) vs. market returns
+
 dough = sum(cross['warret'])
 
 flop = sum(cross['strat'])
-
-
 
 market = (cross['price'].iloc[0] - cross['price'].iloc[-1])
 
@@ -177,6 +187,8 @@ print(alpha, asset, market, flop)
 
 # In[7]:
 
+
+#Aroon download
 
 period = 8
 data_tis, meta_data_ti = ti.get_aroon(symbol='AAPL', interval='1min', time_period=period, series_type='close')
@@ -198,6 +210,8 @@ aroonc.to_csv("C:\\Users\\shadeh\\Documents\\4vs9.csv")
 
 # In[8]:
 
+
+#Aroon oscillator results, same as EMA results
 
 
 aroonc = pd.read_csv("C:\\Users\\shadeh\\Documents\\4vs9.csv")
@@ -259,10 +273,4 @@ else:
 alpha = asset - market
 
 print(alpha, asset, market, flop)
-
-
-# In[ ]:
-
-
-
 
