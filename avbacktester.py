@@ -4,25 +4,16 @@
 # In[3]:
 
 
-get_ipython().system('pip install git+https://github.com/manahl/arctic.git')
-from datetime import datetime as dt
-import pandas as pd
-import numpy as np
-get_ipython().system('pip install alpaca-trade-api')
 import alpaca_trade_api as tradeapi
+import pandas as pd
 from arctic import Arctic
-get_ipython().system('pip install alphavantage')
-get_ipython().system('pip install alpha_vantage')
 from alpha_vantage import timeseries
-import os 
-get_ipython().system('pip install git+https://github.com/RomelTorres/alpha_vantage.git@develop')
+import os
 from alpha_vantage.timeseries import TimeSeries
 from alpha_vantage.techindicators import TechIndicators
 from matplotlib.pyplot import figure
 import matplotlib.pyplot as plt
 import time
-get_ipython().system('pip install schedule')
-import schedule
 
 
 # In[4]:
